@@ -34,6 +34,7 @@ public class Aluno {
     public void setIdade(int idade) { this.idade = idade; }
     public void setDataNasc(Date dataNascimento) {this.dataNascimento = dataNascimento; }
     public void setTelefone(String telefone) { this.telefone = telefone; } 
+    public void setCPF(String CPF) { this.cpf = cpf; }
     
     
     

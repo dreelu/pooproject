@@ -6,45 +6,49 @@ package com.uespi.pooproject.dados;
 
 import java.util.ArrayList;
 import com.uespi.pooproject.Bean.Aluno;
+
 /**
  *
  * @author CTU
  */
 public class AlunoDados {
-    public ArrayList<Aluno> alunosLista = new ArrayList<Aluno>();
-    
-    void salvarAluno(Aluno a) {
+
+    public ArrayList<Aluno> alunosLista = new ArrayList();
+
+    public void salvarAluno(Aluno a) {
         if (!alunosLista.contains(a)) {
             alunosLista.add(a);
         }
     }
 
-    int excluirAluno(Aluno a) {
-        if (alunosLista.contains(a)) {
-            int matricula = a.getMatricula();
-            alunosLista.remove(a);
-            return matricula;
+    public boolean excluirAluno(int matricula) {
+        for (int i = 0; i < alunosLista.size(); i++) {
+            if (alunosLista.get(i).getMatricula() == matricula) {
+                alunosLista.remove(i);
+                return true;
+            }
         }
-        
-        return 0;
+
+        return false;
     }
 
-    Aluno pesquisarAluno(int matricula) {
+    public Aluno pesquisarAluno(int matricula) {
         for (Aluno a : alunosLista) {
-            if (a.getMatricula() == matricula)
+            if (a.getMatricula() == matricula) {
                 return a;
+            }
         }
         return null;
     }
-    
-    Aluno[] acharAlunosNovoVelho() {
+
+    public Aluno[] acharAlunosNovoVelho() {
         int idadeNovo = 100;
         int idadeVelho = 0;
-        
+
         Aluno alunoNovo = null;
         Aluno alunoVelho = null;
-        
-        for (Aluno a: alunosLista) {
+
+        for (Aluno a : alunosLista) {
             if (a.getIdade() > idadeVelho) {
                 idadeVelho = a.getIdade();
                 alunoVelho = a;
@@ -53,13 +57,13 @@ public class AlunoDados {
                 alunoNovo = a;
             }
         }
-        
+
         Aluno[] alunos = {alunoNovo, alunoVelho};
         return alunos;
     }
-    
-    int tamanho() {
+
+    public int tamanho() {
         return alunosLista.size();
     }
-    
+
 }

@@ -25,7 +25,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="idadeLabel" min="-2" max="-2" attributes="0"/>
@@ -34,26 +34,26 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="cpfLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cpfInput" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="cpfInput" min="-2" pref="142" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="telefoneLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="telefoneInput" min="-2" max="-2" attributes="0"/>
+                      <Component id="telefoneInput" min="-2" pref="142" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="matriculaLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Component id="matriculaInput" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                               <Component id="nomeLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Component id="nomeInput" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                              <EmptySpace pref="28" max="32767" attributes="0"/>
                               <Component id="dataNascLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Component id="dataNascInput" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -70,7 +70,7 @@
                               <Component id="botaoListagem" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -93,8 +93,8 @@
                   <Component id="idadeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="idadeInput" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cpfLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cpfInput" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="telefoneLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cpfInput" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="telefoneInput" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="185" max="32767" attributes="0"/>
@@ -172,28 +172,13 @@
       <Events>
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="dataNascInputFocusLost"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dataNascInputActionPerformed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="dataNascInputKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="cpfLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="CPF"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="cpfInput">
-      <Properties>
-        <Property name="columns" type="int" value="10"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cpfInputActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="telefoneInput">
-      <Properties>
-        <Property name="columns" type="int" value="10"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="telefoneInputActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="telefoneLabel">
       <Properties>
@@ -212,11 +197,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Excluir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoExcluirActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="botaoPesquisa">
       <Properties>
         <Property name="text" type="java.lang.String" value="Pesquisa"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoPesquisaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="botaoNovoVelho">
       <Properties>
@@ -239,6 +230,23 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoListagemActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="cpfInput">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+          <Format format="###.###.###-##" subtype="-1" type="5"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cpfInputActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="telefoneInput">
+      <Properties>
+        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+          <Format format="(##)#####-####" subtype="-1" type="5"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

@@ -4,13 +4,22 @@
  */
 package com.uespi.pooproject.swing;
 
+import java.util.Calendar;
+import java.util.Date;
+import com.uespi.pooproject.Bean.Aluno;
+import com.uespi.pooproject.dados.AlunoDados;
+import com.uespi.pooproject.utils.Utils;
+
 /**
  *
  * @author nego
  */
 public class Frame extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Frame.class.getName());
+    private static final Utils u = new Utils();
+
+    AlunoDados ad = new AlunoDados();
 
     /**
      * Creates new form Interfce
@@ -37,8 +46,6 @@ public class Frame extends javax.swing.JFrame {
         idadeLabel = new javax.swing.JLabel();
         dataNascInput = new javax.swing.JFormattedTextField();
         cpfLabel = new javax.swing.JLabel();
-        cpfInput = new javax.swing.JTextField();
-        telefoneInput = new javax.swing.JTextField();
         telefoneLabel = new javax.swing.JLabel();
         botaoSalvar = new javax.swing.JButton();
         botaoExcluir = new javax.swing.JButton();
@@ -46,6 +53,8 @@ public class Frame extends javax.swing.JFrame {
         botaoNovoVelho = new javax.swing.JButton();
         botaoInsercao = new javax.swing.JButton();
         botaoListagem = new javax.swing.JButton();
+        cpfInput = new javax.swing.JFormattedTextField();
+        telefoneInput = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -79,14 +88,13 @@ public class Frame extends javax.swing.JFrame {
             }
         });
         dataNascInput.addActionListener(this::dataNascInputActionPerformed);
+        dataNascInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                dataNascInputKeyTyped(evt);
+            }
+        });
 
         cpfLabel.setText("CPF");
-
-        cpfInput.setColumns(10);
-        cpfInput.addActionListener(this::cpfInputActionPerformed);
-
-        telefoneInput.setColumns(10);
-        telefoneInput.addActionListener(this::telefoneInputActionPerformed);
 
         telefoneLabel.setText("Telefone");
 
@@ -94,8 +102,10 @@ public class Frame extends javax.swing.JFrame {
         botaoSalvar.addActionListener(this::botaoSalvarActionPerformed);
 
         botaoExcluir.setText("Excluir");
+        botaoExcluir.addActionListener(this::botaoExcluirActionPerformed);
 
         botaoPesquisa.setText("Pesquisa");
+        botaoPesquisa.addActionListener(this::botaoPesquisaActionPerformed);
 
         botaoNovoVelho.setText("Mais Novo / Mais Velho");
         botaoNovoVelho.setToolTipText("");
@@ -105,6 +115,19 @@ public class Frame extends javax.swing.JFrame {
 
         botaoListagem.setText("Listagem");
         botaoListagem.addActionListener(this::botaoListagemActionPerformed);
+
+        try {
+            cpfInput.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        cpfInput.addActionListener(this::cpfInputActionPerformed);
+
+        try {
+            telefoneInput.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -120,11 +143,11 @@ public class Frame extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(cpfLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cpfInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(cpfInput, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(telefoneLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(telefoneInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(telefoneInput, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,7 +159,7 @@ public class Frame extends javax.swing.JFrame {
                                 .addComponent(nomeLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(nomeInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                                 .addComponent(dataNascLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(dataNascInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -152,7 +175,7 @@ public class Frame extends javax.swing.JFrame {
                                 .addComponent(botaoInsercao)
                                 .addGap(18, 18, 18)
                                 .addComponent(botaoListagem)))
-                        .addGap(0, 10, Short.MAX_VALUE))))
+                        .addGap(10, 10, 10))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,8 +193,8 @@ public class Frame extends javax.swing.JFrame {
                     .addComponent(idadeLabel)
                     .addComponent(idadeInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cpfLabel)
-                    .addComponent(cpfInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(telefoneLabel)
+                    .addComponent(cpfInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(telefoneInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -191,20 +214,8 @@ public class Frame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_idadeInputActionPerformed
 
-    private void cpfInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cpfInputActionPerformed
-
-    private void telefoneInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoneInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_telefoneInputActionPerformed
-
     private void botaoInsercaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoInsercaoActionPerformed
-        String matricula = matriculaInput.getText();
-        String nome = nomeInput.getText();
-        String dataNascimento = dataNascInput.getText();
-        String cpf = cpfInput.getText();
-        String telefone = telefoneInput.getText();
+
     }//GEN-LAST:event_botaoInsercaoActionPerformed
 
     private void botaoListagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoListagemActionPerformed
@@ -212,7 +223,23 @@ public class Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoListagemActionPerformed
 
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
-        // TODO add your handling code here:
+        int matricula = Integer.parseInt(matriculaInput.getText());
+        String nome = nomeInput.getText();
+        String dataNascimento = dataNascInput.getText();
+        String cpf = cpfInput.getText();
+        String telefone = telefoneInput.getText();
+
+        Date date = u.converterData(dataNascimento);
+
+        Aluno a = new Aluno();
+        a.setMatricula(matricula);
+        a.setNome(nome);
+        a.setDataNasc(date);
+        a.setCPF(cpf);
+        a.setTelefone(telefone);
+        ad.salvarAluno(a);
+
+        System.out.println("Deu certo!!"); //testeeeeeeeeeeeeeeeeeeee
     }//GEN-LAST:event_botaoSalvarActionPerformed
 
     private void matriculaInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matriculaInputActionPerformed
@@ -228,11 +255,79 @@ public class Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_dataNascInputActionPerformed
 
     private void dataNascInputFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_dataNascInputFocusLost
-        int anoNasc = Integer.parseInt(dataNascInput.getText());
-        int idade = 2026 - anoNasc;
-        String idadeStr = Integer.toString(idade);
-        idadeInput.setText(idadeStr);
+        String dataDigitada = dataNascInput.getText();
+
+        if (dataDigitada != null && !dataDigitada.trim().isEmpty()) {
+            try {
+                String[] partes = dataDigitada.split("/");
+
+                if (partes.length != 3) {
+                    throw new java.util.InputMismatchException("Formato incorreto");
+                }
+
+                int dia = Integer.parseInt(partes[0]);
+                int mes = Integer.parseInt(partes[1]) - 1;
+                int ano = Integer.parseInt(partes[2]);
+
+                Calendar calNascimento = Calendar.getInstance();
+                calNascimento.set(ano, mes, dia);
+
+                Calendar calHoje = Calendar.getInstance();
+
+                int idade = calHoje.get(Calendar.YEAR) - calNascimento.get(Calendar.YEAR);
+
+                if (calHoje.get(Calendar.MONTH) < calNascimento.get(Calendar.MONTH)
+                        || (calHoje.get(Calendar.MONTH) == calNascimento.get(Calendar.MONTH)
+                        && calHoje.get(Calendar.DAY_OF_MONTH) < calNascimento.get(Calendar.DAY_OF_MONTH))) {
+                    idade--;
+                }
+
+                idadeInput.setText(String.valueOf(idade));
+
+            } catch (Exception e) {
+                idadeInput.setText("0");
+                dataNascInput.setValue(null);
+                System.out.println("Erro: A data deve estar no formato dd/mm/yyyy.");
+            }
+        } else {
+             idadeInput.setText("0");
+        }
     }//GEN-LAST:event_dataNascInputFocusLost
+
+    private void dataNascInputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dataNascInputKeyTyped
+       
+        String dataDigitada = dataNascInput.getText();
+
+        if (dataDigitada.length() >= 10) {
+            dataNascInput.setText(dataDigitada.substring(0, 9));
+            return;
+        }
+
+        if ((dataDigitada.length() == 2 || dataDigitada.length() == 5) && !(evt.getKeyChar() == '\b')) {
+            dataNascInput.setText(dataDigitada + '/');
+        }
+
+    }//GEN-LAST:event_dataNascInputKeyTyped
+
+    private void botaoPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoPesquisaActionPerformed
+       
+        TelaPesquisa tela = new TelaPesquisa(this, true, ad);
+        tela.setVisible(true);
+        
+    }//GEN-LAST:event_botaoPesquisaActionPerformed
+
+    private void cpfInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cpfInputActionPerformed
+
+    // Botões
+    
+    private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirActionPerformed
+
+        TelaExcluir tela = new TelaExcluir(this, true, ad);
+        tela.setVisible(true);
+
+    }//GEN-LAST:event_botaoExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,7 +361,7 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JButton botaoNovoVelho;
     private javax.swing.JButton botaoPesquisa;
     private javax.swing.JButton botaoSalvar;
-    private javax.swing.JTextField cpfInput;
+    private javax.swing.JFormattedTextField cpfInput;
     private javax.swing.JLabel cpfLabel;
     private javax.swing.JFormattedTextField dataNascInput;
     private javax.swing.JLabel dataNascLabel;
@@ -276,7 +371,7 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JLabel matriculaLabel;
     private javax.swing.JTextField nomeInput;
     private javax.swing.JLabel nomeLabel;
-    private javax.swing.JTextField telefoneInput;
+    private javax.swing.JFormattedTextField telefoneInput;
     private javax.swing.JLabel telefoneLabel;
     // End of variables declaration//GEN-END:variables
 }
