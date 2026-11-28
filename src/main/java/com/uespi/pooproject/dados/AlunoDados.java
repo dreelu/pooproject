@@ -42,20 +42,28 @@ public class AlunoDados {
     }
 
     public Aluno[] acharAlunosNovoVelho() {
-        int idadeNovo = 100;
-        int idadeVelho = 0;
+        int idadeNovo = alunosLista.getFirst().getIdade();
+        int idadeVelho = alunosLista.getFirst().getIdade();
+        
+        System.out.println(alunosLista.getFirst().getIdade());
 
         Aluno alunoNovo = null;
         Aluno alunoVelho = null;
 
         for (Aluno a : alunosLista) {
-            if (a.getIdade() > idadeVelho) {
-                idadeVelho = a.getIdade();
-                alunoVelho = a;
-            } else if (a.getIdade() < idadeNovo) {
+            if (a.getIdade() <= idadeNovo) {
                 idadeNovo = a.getIdade();
                 alunoNovo = a;
+                
             }
+            
+            if (a.getIdade() >= idadeVelho) {
+                idadeVelho = a.getIdade();
+                alunoVelho = a;
+            }
+            
+            System.out.println(a.getIdade());
+           
         }
 
         Aluno[] alunos = {alunoNovo, alunoVelho};
@@ -65,5 +73,6 @@ public class AlunoDados {
     public int tamanho() {
         return alunosLista.size();
     }
+    
 
 }

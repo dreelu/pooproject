@@ -32,4 +32,25 @@ public class Utils {
             throw new IllegalArgumentException("Data inválida!");
         }
     }
+    
+    public int calcularIdade(Date data) {
+        try {
+            Calendar calNascimento = Calendar.getInstance();
+            calNascimento.setTime(data);
+        
+            Calendar calHoje = Calendar.getInstance();
+
+            int idade = calHoje.get(Calendar.YEAR) - calNascimento.get(Calendar.YEAR);
+        
+            if (calHoje.get(Calendar.MONTH) < calNascimento.get(Calendar.MONTH)
+                || (calHoje.get(Calendar.MONTH) == calNascimento.get(Calendar.MONTH)
+                && calHoje.get(Calendar.DAY_OF_MONTH) < calNascimento.get(Calendar.DAY_OF_MONTH))) {
+                    idade--;
+                }
+            
+            return idade;
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Data inválida!");
+        }
+    }
 }

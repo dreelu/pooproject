@@ -62,19 +62,16 @@ public class Frame extends javax.swing.JFrame {
         matriculaLabel.setText("Matrícula");
 
         matriculaInput.setColumns(10);
-        matriculaInput.addActionListener(this::matriculaInputActionPerformed);
 
         nomeLabel.setText("Nome");
 
         nomeInput.setColumns(30);
-        nomeInput.addActionListener(this::nomeInputActionPerformed);
 
         dataNascLabel.setText("Data de Nascimento");
 
         idadeInput.setEditable(false);
         idadeInput.setColumns(10);
         idadeInput.setText("0");
-        idadeInput.addActionListener(this::idadeInputActionPerformed);
 
         idadeLabel.setText("Idade");
 
@@ -109,6 +106,7 @@ public class Frame extends javax.swing.JFrame {
 
         botaoNovoVelho.setText("Mais Novo / Mais Velho");
         botaoNovoVelho.setToolTipText("");
+        botaoNovoVelho.addActionListener(this::botaoNovoVelhoActionPerformed);
 
         botaoInsercao.setText("Inserção");
         botaoInsercao.addActionListener(this::botaoInsercaoActionPerformed);
@@ -121,7 +119,6 @@ public class Frame extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        cpfInput.addActionListener(this::cpfInputActionPerformed);
 
         try {
             telefoneInput.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
@@ -210,10 +207,6 @@ public class Frame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void idadeInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idadeInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_idadeInputActionPerformed
-
     private void botaoInsercaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoInsercaoActionPerformed
 
     }//GEN-LAST:event_botaoInsercaoActionPerformed
@@ -241,14 +234,6 @@ public class Frame extends javax.swing.JFrame {
 
         System.out.println("Deu certo!!"); //testeeeeeeeeeeeeeeeeeeee
     }//GEN-LAST:event_botaoSalvarActionPerformed
-
-    private void matriculaInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_matriculaInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_matriculaInputActionPerformed
-
-    private void nomeInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomeInputActionPerformed
 
     private void dataNascInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dataNascInputActionPerformed
         // TODO add your handling code here:
@@ -316,10 +301,6 @@ public class Frame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_botaoPesquisaActionPerformed
 
-    private void cpfInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cpfInputActionPerformed
-
     // Botões
     
     private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoExcluirActionPerformed
@@ -328,6 +309,11 @@ public class Frame extends javax.swing.JFrame {
         tela.setVisible(true);
 
     }//GEN-LAST:event_botaoExcluirActionPerformed
+
+    private void botaoNovoVelhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoNovoVelhoActionPerformed
+        TelaMaisNovoMaisVelho tela = new TelaMaisNovoMaisVelho(this, true, ad);
+        tela.setVisible(true);
+    }//GEN-LAST:event_botaoNovoVelhoActionPerformed
 
     /**
      * @param args the command line arguments

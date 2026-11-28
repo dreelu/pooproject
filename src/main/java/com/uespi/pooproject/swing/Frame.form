@@ -121,9 +121,6 @@
       <Properties>
         <Property name="columns" type="int" value="10"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="matriculaInputActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="nomeLabel">
       <Properties>
@@ -134,9 +131,6 @@
       <Properties>
         <Property name="columns" type="int" value="30"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nomeInputActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="dataNascLabel">
       <Properties>
@@ -149,9 +143,6 @@
         <Property name="columns" type="int" value="10"/>
         <Property name="text" type="java.lang.String" value="0"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="idadeInputActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="idadeLabel">
       <Properties>
@@ -214,6 +205,9 @@
         <Property name="text" type="java.lang.String" value="Mais Novo / Mais Velho"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoNovoVelhoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="botaoInsercao">
       <Properties>
@@ -237,9 +231,6 @@
           <Format format="###.###.###-##" subtype="-1" type="5"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cpfInputActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="telefoneInput">
       <Properties>

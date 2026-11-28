@@ -5,6 +5,8 @@
 package com.uespi.pooproject.Bean;
 
 import java.util.Date;
+import com.uespi.pooproject.utils.Utils;
+import java.util.Calendar;
 /**
  *
  * @author CTU
@@ -12,10 +14,11 @@ import java.util.Date;
 public class Aluno {
     public Aluno(){};
     
+    private Utils u = new Utils();
+    
     // Atributos
     private int matricula;
     private String nome;
-    private int idade;
     private Date dataNascimento; 
     private String telefone;
     private String cpf; 
@@ -23,15 +26,17 @@ public class Aluno {
     // Getters
     public int getMatricula() { return matricula; }
     public String getNome() { return nome; }
-    public int getIdade() { return idade; }
     public Date getDataNasc() { return dataNascimento; }
     public String getTelefone() { return telefone; }
     public String getCPF() { return cpf; }
     
+    public int getIdade() { 
+        return u.calcularIdade(dataNascimento);
+    }
+    
     // Setters
     public void setMatricula(int matricula) { this.matricula = matricula; }
     public void setNome(String nome) { this.nome = nome; }
-    public void setIdade(int idade) { this.idade = idade; }
     public void setDataNasc(Date dataNascimento) {this.dataNascimento = dataNascimento; }
     public void setTelefone(String telefone) { this.telefone = telefone; } 
     public void setCPF(String CPF) { this.cpf = CPF; }
