@@ -5,7 +5,9 @@
 package com.uespi.pooproject.dados;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import com.uespi.pooproject.Bean.Aluno;
+
 
 /**
  *
@@ -16,9 +18,15 @@ public class AlunoDados {
     public ArrayList<Aluno> alunosLista = new ArrayList();
 
     public void salvarAluno(Aluno a) {
-        if (!alunosLista.contains(a)) {
-            alunosLista.add(a);
+        
+        for (Aluno al : alunosLista) {
+            if (al.getMatricula() == a.getMatricula()) {
+                throw new InputMismatchException("Um aluno com essa matrícula já foi cadastrado.");
+            }
         }
+        
+            alunosLista.add(a);
+
     }
 
     public boolean excluirAluno(int matricula) {

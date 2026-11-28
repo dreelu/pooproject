@@ -217,28 +217,36 @@ public class Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_botaoListagemActionPerformed
 
     private void botaoSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSalvarActionPerformed
+        int matricula;
+        String nome;
+        String dataNascimento;
+        String cpf;
+        String telefone;
+        Date date;
+        
         try {
             
-            int matricula = Integer.parseInt(matriculaInput.getText());
-            String nome = nomeInput.getText();
-            String dataNascimento = dataNascInput.getText();
-            String cpf = cpfInput.getText();
-            String telefone = telefoneInput.getText();
+            matricula = Integer.parseInt(matriculaInput.getText());
+            nome = nomeInput.getText();
+            dataNascimento = dataNascInput.getText();
+            cpf = cpfInput.getText();
+            telefone = telefoneInput.getText();
 
-            Date date = u.converterData(dataNascimento);
+            date = u.converterData(dataNascimento);
             
-            Aluno a = new Aluno();
-            a.setMatricula(matricula);
-            a.setNome(nome);
-            a.setDataNasc(date);
-            a.setCPF(cpf);
-            a.setTelefone(telefone);
-            ad.salvarAluno(a);
             
             System.out.println("Deu certo!!"); //testeeeeeeeeeeeeeeeeeeee
         } catch (Exception e) {
             throw new InputMismatchException("Input inválido.");
         }
+        
+        Aluno a = new Aluno();
+        a.setMatricula(matricula);
+        a.setNome(nome);
+        a.setDataNasc(date);
+        a.setCPF(cpf);
+        a.setTelefone(telefone);
+        ad.salvarAluno(a);
 
         
     }//GEN-LAST:event_botaoSalvarActionPerformed
